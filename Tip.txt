@@ -1,0 +1,5 @@
+啟動虛擬環境
+1..venv\Scripts\Activate.ps1
+
+離開虛擬環境
+1.deactivate
