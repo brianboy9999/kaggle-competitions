@@ -1,3 +1,7 @@
+資料集特徵:
+1.分類預測
+2.標準為Accuracy
+
 用 sklearn Pipeline，把「只從 train 學到的清洗規則」
 安全地套用到 validation / test，避免任何資料洩漏(test.csv 從頭到尾沒參與 fit，所有補值都來自 train，Pipeline 保證順序正確)。
 
