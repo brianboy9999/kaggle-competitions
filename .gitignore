@@ -1,12 +1,40 @@
 # Python
 __pycache__/
 *.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
 
 # Virtual env
+venv/
 .venv/
+env/
+ENV/
 
 # Jupyter
 .ipynb_checkpoints/
+*.ipynb
 
-# Data (通常不傳)
+# Data files (Kaggle datasets)
+*.csv
 data/
+*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model files
+*.pkl
+*.h5
+*.model
+
+# Logs
+*.log
