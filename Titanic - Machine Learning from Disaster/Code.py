@@ -25,7 +25,7 @@ RARE_TITLES = [
 ]
 
 class TitanicPreprocessor(BaseEstimator, TransformerMixin):
-    def fit(self, X, y=None):
+    def fit(self, X, y = None):
         X = X.copy()
 
         X['Title'] = X['Name'].str.extract(r' ([A-Za-z]+)\.', expand=False)
@@ -51,7 +51,7 @@ class TitanicPreprocessor(BaseEstimator, TransformerMixin):
             lambda r: self.title_age_median_.get(
                 r['Title'], self.title_age_median_.median()
             ) if pd.isnull(r['Age']) else r['Age'],
-            axis=1
+            axis = 1
         )
 
         X['Fare'] = X['Fare'].fillna(self.fare_median_)
@@ -75,32 +75,32 @@ X = train_data.drop('Survived', axis=1)
 y = train_data['Survived']
 
 X_train, X_val, y_train, y_val = train_test_split(
-    X, y, test_size=0.1, random_state=42
+    X, y, test_size = 0.1, random_state = 42
 )
 
 # ===============================
 # 4. Pipeline
 # ===============================
 categorical_cols = ['Sex', 'Embarked', 'Title', 'TicketPrefix']
-numeric_cols = ['Age', 'Fare', 'SibSp', 'Parch', 'Pclass', 'HasCabin', 'FamilySize', 'IsAlone']
+numerical_cols = ['Age', 'Fare', 'SibSp', 'Parch', 'Pclass', 'HasCabin', 'FamilySize', 'IsAlone']
 
 preprocess = ColumnTransformer(
-    transformers=[
+    transformers = [
         ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_cols),
-        ('num', 'passthrough', numeric_cols)
+        ('num', 'passthrough', numerical_cols)
     ]
 )
 
-pipeline = Pipeline(steps=[
+pipeline = Pipeline(steps = [
     ('cleaner', TitanicPreprocessor()),
     ('drop_cols', FunctionTransformer(
-        lambda df: df.drop(['Name', 'Ticket', 'Cabin'], axis=1)
+        lambda df: df.drop(['Name', 'Ticket', 'Cabin'], axis = 1)
     )),
     ('encoder', preprocess),
     ('model', RandomForestClassifier(
-        n_estimators=300,
-        max_depth=5,
-        min_samples_split=10,
+        n_estimators = 300,
+        max_depth = 5,
+        min_samples_split = 10,
         min_samples_leaf=5,
         random_state=42
     ))
